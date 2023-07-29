@@ -1,0 +1,27 @@
+Выведите список имен пассажиров, чей рейс был отложен. 
+Предусмотрите в выборке аэропорт отправления. 
+В выборке должны присутствовать два атрибута: name, departure.
+  
+  Список таблиц
+airliners, trips, clients, tickets.
+
+WITH
+tbl1 as (
+    SELECT clients.name, tickets.id as ticketid, tickets.trip_id as ticketstripid
+    FROM tickets
+  LEFT JOIN clients ON tickets.client_id = clients.id),
+  
+  tbl2 as (
+    SELECT trips.id as tripsid, trips.status, trips.departure
+    FROM trips
+    LEFT JOIN airliners ON airliners.id = trips.airliner_id
+  WHERE trips.status = 'Delayed'),
+  
+tbl3 as (
+    SELECT *
+    FROM tbl2
+  LEFT JOIN tbl1 ON tbl1.ticketstripid = tbl2.tripsid)
+  
+  SELECT name, departure
+  FROM tbl3
+  WHERE name NOT NULL
