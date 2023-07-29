@@ -1,0 +1,29 @@
+Выведите имена пассажиров, летавших на борту (airliner_id) 00095579. 
+В выборке должен присутствовать один атрибут: name.
+
+Список таблиц
+airliners
+trips
+clients
+tickets
+
+WITH
+tbl1 as (
+    SELECT clients.name, tickets.id as ticketid, tickets.trip_id as ticketstripid
+    FROM tickets
+  LEFT JOIN clients ON tickets.client_id = clients.id),
+  
+  tbl2 as (
+    SELECT trips.id as tripsid
+    FROM trips
+    LEFT JOIN airliners ON airliners.id = trips.airliner_id
+  WHERE airliners.id = '00095579'),
+  
+tbl3 as (
+    SELECT *
+    FROM tbl2
+  LEFT JOIN tbl1 ON tbl1.ticketstripid = tbl2.tripsid)
+  
+  SELECT name
+  FROM tbl3
+  WHERE name NOT NULL
