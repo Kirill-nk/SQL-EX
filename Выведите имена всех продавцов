@@ -1,0 +1,13 @@
+Выведите имена всех продавцов. Предусмотрите также в выборке имена их боссов, сформировав атрибут boss_name. 
+В выборке должны присутствовать два атрибута: sname, boss_name.
+
+Список таблиц: SELLERS, CUSTOMERS, ORDERS
+
+Код
+1 SELECT --B.SELL_ID, 
+2        B.SNAME,
+3        --PR.SELL_ID, 
+4        PR.SNAME as boss_name
+5               
+6  FROM SELLERS AS PR RIGHT OUTER JOIN SELLERS AS B
+7        ON PR.SELL_ID = B.BOSS_ID
