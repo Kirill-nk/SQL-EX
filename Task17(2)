@@ -6,3 +6,8 @@ SELECT DISTINCT Product.type, Laptop.model,Laptop.speed
 FROM Laptop LEFT JOIN
      Product ON Laptop.model = Product.model
 WHERE Laptop.speed < ALL (SELECT speed FROM PC)
+
+
+Результат выполнения Вашего запроса:
+type	model	speed
+Laptop	1298	350
