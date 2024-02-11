@@ -1,0 +1,6 @@
+WITH 
+   tab2 as (SELECT *
+            FROM Classes
+            WHERE bore >= 16)
+SELECT class, country
+FROM tab2
