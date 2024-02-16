@@ -1,0 +1,10 @@
+SELECT maker, AVG(screen) scr
+FROM Laptop left join Product P on Laptop.model = P.model
+GROUP BY maker
+
+Правильно.
+Результат выполнения Вашего запроса:
+maker	scr
+A	13
+B	14
+C	12
